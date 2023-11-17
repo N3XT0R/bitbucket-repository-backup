@@ -4,7 +4,7 @@ namespace N3xt0r\BitbucketRepositoryBackup\Console;
 
 use Symfony\Component\Console\Command\Command;
 
-class BaseCommand extends Command
+abstract class BaseCommand extends Command
 {
 
     public function getName(): ?string
