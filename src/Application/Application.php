@@ -2,12 +2,16 @@
 
 namespace N3xt0r\BitbucketRepositoryBackup\Application;
 
+use N3xt0r\BitbucketRepositoryBackup\Console\CreateBackupCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Command\Command;
 
 final class Application
 {
 
-    protected array $commands = [];
+    protected array $commands = [
+        CreateBackupCommand::class,
+    ];
 
     public function getCommands(): array
     {
@@ -31,7 +35,12 @@ final class Application
         $commands = $this->getCommands();
 
         foreach ($commands as $command) {
-            $application->add($command);
+            if (class_exists($command)) {
+                $instance = new $command();
+                if ($instance instanceof Command) {
+                    $application->add($instance);
+                }
+            }
         }
     }
 
