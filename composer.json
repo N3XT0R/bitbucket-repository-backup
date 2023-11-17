@@ -24,5 +24,11 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
-    }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.4"
+    },
+    "bin": [
+        "bin/backup"
+    ]
 }
