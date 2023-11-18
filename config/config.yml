@@ -1,8 +1,8 @@
 bitbucket:
   oauth:
     workspace: "snuddev"
-    "key": "rJXx5WbqXeyyFuGS3L"
-    secret: "6sUBXeptwQCjuQkymvSuuyYeh8Y4qs5z"
+    "key": ""
+    secret: ""
 
 backup:
   dir-path: ""
