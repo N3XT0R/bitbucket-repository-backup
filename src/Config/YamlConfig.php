@@ -42,6 +42,7 @@ class YamlConfig
         $path = $this->getPathToConfig();
         if (file_exists($path)) {
             $config = Yaml::parseFile($this->getPathToConfig());
+            var_dump($config);
             $this->setConfig($config);
             $result = true;
         }

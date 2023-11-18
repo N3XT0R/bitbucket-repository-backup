@@ -1,3 +1,11 @@
 bitbucket:
-  workspace: "xxx"
-  api-key: ""
+  oauth:
+    workspace: "snuddev"
+    "key": "rJXx5WbqXeyyFuGS3L"
+    secret: "6sUBXeptwQCjuQkymvSuuyYeh8Y4qs5z"
+
+backup:
+  dir-path: ""
+  max-retries: ""
+  max-fails: ""
+  amount-of-days-to-store: 7
