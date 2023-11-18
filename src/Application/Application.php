@@ -2,11 +2,14 @@
 
 namespace N3xt0r\BitbucketRepositoryBackup\Application;
 
+use Monolog\Handler\SyslogHandler;
+use Monolog\Logger;
 use N3xt0r\BitbucketRepositoryBackup\Config\YamlConfig;
 use N3xt0r\BitbucketRepositoryBackup\Console\BaseCommand;
 use N3xt0r\BitbucketRepositoryBackup\Console\CreateBackupCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 
 final class Application
 {
@@ -49,12 +52,13 @@ final class Application
     public function run(): int
     {
         $exitCode = 0;
+        $logger = $this->createLogger();
         try {
             $application = new SymfonyApplication();
             $this->registerCommands($application);
             $exitCode = $application->run();
         } catch (\Throwable $e) {
-            echo $e->getMessage();
+            $logger->error($e->getMessage(), ['context' => $e]);
         }
         return $exitCode;
     }
@@ -72,6 +76,12 @@ final class Application
                 }
             }
         }
+    }
+
+    protected function createLogger(): Logger
+    {
+        $logger = new Logger('log');
+        $logger->pushHandler(new SyslogHandler('bitbucket-repository-backup'));
     }
 
 }
