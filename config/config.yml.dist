@@ -1,0 +1,11 @@
+bitbucket:
+  oauth:
+    workspace: "my-app-name"
+    "key": "key"
+    secret: "secret"
+
+backup:
+  dir-path: ""
+  max-retries: ""
+  max-fails: ""
+  amount-of-days-to-store: 7
