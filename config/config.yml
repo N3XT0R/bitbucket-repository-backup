@@ -1,6 +1,6 @@
 bitbucket:
   oauth:
-    workspace: "snuddev"
+    workspace: ""
     "key": ""
     secret: ""
 
