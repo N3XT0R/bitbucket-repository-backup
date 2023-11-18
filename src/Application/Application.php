@@ -8,8 +8,6 @@ use N3xt0r\BitbucketRepositoryBackup\Config\YamlConfig;
 use N3xt0r\BitbucketRepositoryBackup\Console\BaseCommand;
 use N3xt0r\BitbucketRepositoryBackup\Console\CreateBackupCommand;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Logger\ConsoleLogger;
 
 final class Application
 {
@@ -17,6 +15,8 @@ final class Application
     protected array $config = [];
 
     private const configPath = '../../config/config.yml';
+
+    protected Logger $logger;
 
     protected array $commands = [
         CreateBackupCommand::class,
@@ -49,10 +49,21 @@ final class Application
         $this->config = $config;
     }
 
+    public function getLogger(): Logger
+    {
+        return $this->logger;
+    }
+
+    public function setLogger(Logger $logger): void
+    {
+        $this->logger = $logger;
+    }
+
     public function run(): int
     {
         $exitCode = 0;
         $logger = $this->createLogger();
+        $this->setLogger($logger);
         try {
             $application = new SymfonyApplication();
             $this->registerCommands($application);
