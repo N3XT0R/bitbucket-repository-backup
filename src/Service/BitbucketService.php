@@ -7,7 +7,7 @@ use N3xt0r\BitbucketRepositoryBackup\Entity\AuthenticationEntity;
 
 class BitbucketService
 {
-    protected Client $client;
+    protected ?Client $client = null;
     protected AuthenticationEntity $authenticationEntity;
 
     public function __construct(AuthenticationEntity $authenticationEntity)
@@ -17,6 +17,9 @@ class BitbucketService
 
     public function getClient(): Client
     {
+        if (!$this->client) {
+            $this->setClient(new Client());
+        }
         return $this->client;
     }
 
@@ -33,5 +36,13 @@ class BitbucketService
     public function setAuthenticationEntity(AuthenticationEntity $authenticationEntity): void
     {
         $this->authenticationEntity = $authenticationEntity;
+    }
+
+    protected function connect(): void
+    {
+        $client = $this->getClient();
+        $client->authenticate(
+            Client::AUTH_OAUTH_TOKEN,
+        );
     }
 }

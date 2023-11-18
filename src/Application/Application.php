@@ -48,9 +48,15 @@ final class Application
 
     public function run(): int
     {
-        $application = new SymfonyApplication();
-        $this->registerCommands($application);
-        return $application->run();
+        $exitCode = 0;
+        try {
+            $application = new SymfonyApplication();
+            $this->registerCommands($application);
+            $exitCode = $application->run();
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+        }
+        return $exitCode;
     }
 
     protected function registerCommands(SymfonyApplication $application): void
