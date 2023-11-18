@@ -3,9 +3,24 @@
 namespace N3xt0r\BitbucketRepositoryBackup\Console;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseCommand extends Command
 {
+
+    protected array $config = [];
+
+    public function getConfig(): array
+    {
+        return $this->config;
+    }
+
+    public function setConfig(array $config): void
+    {
+        $this->config = $config;
+    }
+
 
     public function getName(): ?string
     {
@@ -20,9 +35,10 @@ abstract class BaseCommand extends Command
                         get_class($this))
                 )
             );
-            var_dump($name);
         }
 
         return $name;
     }
+
+
 }
